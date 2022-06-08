@@ -31,24 +31,26 @@
 		<div id="countdown">
 	</div>
 	<script>
+		const renderTimer = (raidTime) => {
+			const diff = raidTime - Date.now();
+			if (diff > 0) {
+				days = Math.floor(diff / (1000 * 60 * 60 * 24));
+				hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+				seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+				document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`
+			}
+		};
+
 		window.addEventListener('DOMContentLoaded', (event) => {
 			const raidTime = new Date(Date.UTC(2022,5,8,17,30));
 			let days = 0;
 			let hours = 0;
 			let minutes = 0;
 			let seconds = 0;
-
-			setInterval(() => {
-				const diff = raidTime - Date.now();
-				if (diff > 0) {
-					days = Math.floor(diff / (1000 * 60 * 60 * 24));
-					hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-					minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-					seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-					document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`
-				}
-			}, 1000);
+			renderTimer(raidTime);
+			setInterval(() => renderTimer(raidTime), 1000);
 		});
 
 	</script>
