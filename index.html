@@ -33,13 +33,17 @@
 	<script>
 		const renderTimer = (raidTime) => {
 			const diff = raidTime - Date.now();
+			const cdElement = document.getElementById('countdown');
 			if (diff > 0) {
 				days = Math.floor(diff / (1000 * 60 * 60 * 24));
 				hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 				minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 				seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-				document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`
+				cdElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`
+			}
+			else {
+				cdElement.innerHTML = "Fireworks";
 			}
 		};
 
