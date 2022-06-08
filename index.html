@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Raid Countdown</title>
+</head>
+<body>
+	<div class="container">
+		<h1>Next raid in:</h1>
+		<div id="countdown">
+		</div>	
+	</div>
+	<script>
+		window.addEventListener('DOMContentLoaded', (event) => {
+			const raidTime = new Date(Date.UTC(2022,5,8,17,30));
+			let days = 0;
+			let hours = 0;
+			let minutes = 0;
+			let seconds = 0;
+
+			setInterval(() => {
+				const diff = raidTime - Date.now();
+				if (diff > 0) {
+					days = Math.floor(diff / (1000 * 60 * 60 * 24));
+					hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+					minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+					seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+					document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`
+				}
+			}, 1000);
+		});
+
+	</script>
+</body>
+</html>
